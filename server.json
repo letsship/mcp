@@ -1,0 +1,44 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "ai.letsship/ship",
+  "version": "0.21.0",
+  "title": "SHIP",
+  "description": "File missions for the SHIP agent fleet, follow them, send instructions and read their proof.",
+  "websiteUrl": "https://letsship.ai/docs/mcp",
+  "icons": [
+    {
+      "src": "https://letsship.ai/icon.png",
+      "mimeType": "image/png",
+      "sizes": [
+        "512x512"
+      ]
+    }
+  ],
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://mcp.letsship.ai/mcp",
+      "headers": [
+        {
+          "name": "Authorization",
+          "description": "A SHIP personal access token, sent as a bearer token. Create one at https://letsship.ai/settings/tokens. Leave it out to sign in with OAuth instead.",
+          "isRequired": false,
+          "isSecret": true,
+          "value": "Bearer {token}",
+          "variables": {
+            "token": {
+              "description": "The token value. It starts with pat_.",
+              "isRequired": true,
+              "isSecret": true,
+              "placeholder": "pat_..."
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "repository": {
+    "url": "https://github.com/letsship/mcp",
+    "source": "github"
+  }
+}
