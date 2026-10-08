@@ -23,7 +23,7 @@ The transport is Streamable HTTP. The server is stateless, so a client can recon
 
 ## Sign in
 
-**OAuth 2.1.** A client that supports MCP authorization finds the sign-in on its own: the server answers `401` with a `WWW-Authenticate` header that points to
+**OAuth 2.1.** A client that supports MCP authorization finds the sign-in on its own. A request that needs a token gets `401` with a `WWW-Authenticate` header that points to
 `https://mcp.letsship.ai/.well-known/oauth-protected-resource/mcp`. SHIP supports dynamic client registration and client ID metadata documents, so you do not register a client first. A person approves the request in the SHIP console.
 
 **Personal access token.** A client without OAuth sends `Authorization: Bearer pat_...`. Create a token at https://letsship.ai/settings/tokens, and bind it to one project so that it can reach only that project.
@@ -251,7 +251,7 @@ Do not call `start_mission` again to send feedback. A restart carries no message
 | `401` and no sign-in window | Your client has no MCP OAuth. Send a personal access token in the `Authorization` header. |
 | A tool refuses with a scope name | The token lacks that scope. Create a token with it, or ask an owner for the role. |
 | `create_mission` refuses with `credits_exhausted` | The workspace has no credits left. `get_billing` shows the balance. |
-| The tool list is empty | The client did not finish sign-in. Remove the server and add it again. |
+| The tool list is empty, or each tool call gets `401` | The client did not finish sign-in. Sign in again from the MCP menu of your client, or remove the server and add it again. |
 | `whoami` names another project | The token is bound to that project. Use a token for the project you want. |
 
 ## Skills for your coding agent
