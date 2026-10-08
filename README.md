@@ -7,7 +7,9 @@
 [![Auth](https://img.shields.io/badge/auth-OAuth%202.1%20%7C%20token-0f0a07)](https://letsship.ai/docs/mcp#connect-a-client)
 [![Docs](https://img.shields.io/badge/docs-letsship.ai-0f0a07)](https://letsship.ai/docs/mcp)
 
-Hand issues to SHIP's agent fleet and follow each mission to a reviewed, tested pull request. Your assistant files the work, and SHIP's agents plan, build, review and test each change in your own GitHub repository.
+Assign Linear or GitHub issues to autonomous coding agents, and get pull requests that pass automated code review and tests. SHIP runs agentic coding in your own GitHub repository. From your assistant, file missions, follow them, send instructions and read the proof of each run.
+
+SHIP runs an agentic SDLC as a managed AI software factory. A Planner, a Builder, a Reviewer and a Tester each do one stage, and your CI is a gate between them. Each role runs the coding agent and the model that you choose: Claude Code, Codex, OpenCode, Kilo Code or the pi coding agent.
 
 [![Install in VS Code](https://img.shields.io/badge/VS%20Code-Install%20SHIP-0098FF)](https://vscode.dev/redirect/mcp/install?name=ship&config=%7B%22type%22%3A%22http%22%2C%22url%22%3A%22https%3A%2F%2Fmcp.letsship.ai%2Fmcp%22%7D)
 [![Install in VS Code Insiders](https://img.shields.io/badge/VS%20Code%20Insiders-Install%20SHIP-24bfa5)](https://insiders.vscode.dev/redirect/mcp/install?name=ship&config=%7B%22type%22%3A%22http%22%2C%22url%22%3A%22https%3A%2F%2Fmcp.letsship.ai%2Fmcp%22%7D)
@@ -184,6 +186,7 @@ Each tool declares `readOnlyHint`, `destructiveHint` and `openWorldHint`, so you
 | `list_agent_runs` | reads | Agent runs, live and finished, for one mission, one role or one status |
 | `get_agent_run` | reads | The detail and resource use of one run |
 | `get_agent_run_logs` | reads | What an agent did inside a run |
+| `watch_agent_run` | reads | Wait on one run and follow its events, until the run ends or its mission moves to another stage |
 | `stop_agent_run` | removes | Stop the agent in one run before it finishes |
 
 ### Preview environments
@@ -257,6 +260,14 @@ Do not call `start_mission` again to send feedback. A restart carries no message
 ## Skills for your coding agent
 
 The SHIP skills teach a coding agent to hand work to SHIP from the terminal. See [letsship/skills](https://github.com/letsship/skills), or run `npx skills add https://letsship.ai`.
+
+## Learn more
+
+- [What an agentic SDLC is, from issue to verified pull request](https://letsship.ai/blog/agentic-sdlc)
+- [What an AI software factory is, and how to build one](https://letsship.ai/blog/what-is-an-ai-software-factory)
+- [SWE-in-a-team, a coding agent benchmark of 260 missions](https://letsship.ai/blog/swe-in-a-team)
+- [Run the pi coding agent headless](https://letsship.ai/blog/run-pi-coding-agent-headless)
+- [Send a pull request that your coding agent wrote for review and test](https://letsship.ai/platform/agent-to-pr)
 
 ## Links
 
