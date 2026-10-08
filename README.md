@@ -145,6 +145,10 @@ Each tool declares `readOnlyHint`, `destructiveHint` and `openWorldHint`, so you
 | `set_agents_override` | writes | Change the harness, model, prompt or checkpoint of one role for one mission. The override goes on top of `ship.yml` and does not change the file |
 | `get_agents_override` | reads | Read the override that applies to a mission now |
 | `clear_agents_override` | removes | Remove the override, so the mission uses the project's configuration again |
+| `set_mission_auto_merge` | reaches outside SHIP | Turn auto-merge on or off for one mission. For that mission, the setting replaces the auto-merge of the project |
+| `archive_mission` | writes | Hide a mission from the board and from `list_missions`. Only an owner or an admin can archive a mission |
+| `unarchive_mission` | writes | Show an archived mission on the board again |
+| `set_mission_disposition` | writes | Record why a mission ended, for example a test or work that another mission replaced, or clear the value. The delivery statistics use this value |
 
 ### Projects and proof
 
@@ -152,6 +156,7 @@ Each tool declares `readOnlyHint`, `destructiveHint` and `openWorldHint`, so you
 | --- | --- | --- |
 | `list_projects` | reads | The projects that the token can reach |
 | `get_project` | reads | The configuration and connections of one project |
+| `update_project` | reaches outside SHIP | Change the name, status, auto-merge, issue code, default sandbox or connections of a project |
 | `list_artifacts` | reads | The proof that a run produced, such as test traces and screenshots |
 | `get_artifact` | reads | One artifact, with a link to open it |
 
@@ -166,6 +171,7 @@ Each tool declares `readOnlyHint`, `destructiveHint` and `openWorldHint`, so you
 | `run_scheduled_task` | reaches outside SHIP | Run a scheduled task now, outside its schedule |
 | `list_scheduled_task_runs` | reads | What past runs did, and what they cost |
 | `list_scheduled_task_templates` | reads | Templates that you can copy to start a scheduled task |
+| `delete_scheduled_task` | removes | Delete a scheduled task and its run history. Missions that the task started continue |
 
 ### MCP servers for your agents
 
@@ -224,6 +230,8 @@ Each tool declares `readOnlyHint`, `destructiveHint` and `openWorldHint`, so you
 | `list_sandbox_registries` | reads | The private package registries that sandboxes install from. A secret is never returned |
 | `save_sandbox_registry` | replaces | Store or replace the credential for a registry. The credential never enters a sandbox |
 | `get_sandbox_capacity` | reads | How many agents your missions run at once, against the limit of your organization |
+| `delete_sandbox_template` | removes | Delete a sandbox. The API refuses a sandbox that an agent or the default of a project uses |
+| `delete_sandbox_registry` | removes | Remove the credential of a private registry |
 
 ### Platform operators
 
