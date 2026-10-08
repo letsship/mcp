@@ -70,6 +70,21 @@ claude mcp add --transport http ship https://mcp.letsship.ai/mcp
 url = "https://mcp.letsship.ai/mcp"
 ```
 
+**Grok.** Open grok.com/connectors, select **New Connector**, then **Custom**, paste `https://mcp.letsship.ai/mcp` and sign in.
+
+**xAI API.** Pass the URL as a remote MCP tool, with a token in `headers`:
+
+```json
+{
+  "type": "mcp",
+  "server_url": "https://mcp.letsship.ai/mcp",
+  "server_label": "ship",
+  "headers": {
+    "Authorization": "Bearer pat_your_token_here"
+  }
+}
+```
+
 **A client that speaks only stdio** connects through `mcp-remote`:
 
 ```json
