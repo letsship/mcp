@@ -1,4 +1,4 @@
-<p align="center"><img src="assets/ship.png" alt="SHIP" width="96" height="96"></p>
+<p align="center"><a href="https://letsship.ai" target="_blank" rel="noopener"><img src="assets/ship.png" alt="SHIP" width="96" height="96"></a></p>
 
 # SHIP MCP server
 
@@ -7,7 +7,7 @@
 [![Auth](https://img.shields.io/badge/auth-OAuth%202.1%20%7C%20token-0f0a07)](https://letsship.ai/docs/mcp#connect-a-client)
 [![Docs](https://img.shields.io/badge/docs-letsship.ai-0f0a07)](https://letsship.ai/docs/mcp)
 
-Assign Linear or GitHub issues to an AI coding agent team. Its coding agents plan and build each change, run code review and tests, and open a pull request ready to merge in your GitHub repository. From your assistant, file missions, follow them, send instructions and read the proof of each run.
+Assign Linear or GitHub issues to an AI coding agent team. Its coding agents plan and build each change, run code review and tests, and open a pull request ready to merge in your GitHub repository. With this MCP server, your assistant can file missions, follow them, send instructions and read the proof of each run.
 
 SHIP runs an agentic SDLC as a managed AI software factory. A Planner, a Builder, a Reviewer and a Tester each do one stage, and your CI is a gate between them. Each role runs the coding agent and the model that you choose: Claude Code, Codex, OpenCode, Kilo Code or the pi coding agent.
 
@@ -25,10 +25,10 @@ The transport is Streamable HTTP. The server is stateless, so a client can recon
 
 ## Sign in
 
-**OAuth 2.1.** A client that supports MCP authorization finds the sign-in on its own. A request that needs a token gets `401` with a `WWW-Authenticate` header that points to
-`https://mcp.letsship.ai/.well-known/oauth-protected-resource/mcp`. SHIP supports dynamic client registration and client ID metadata documents, so you do not register a client first. A person approves the request in the SHIP console.
+**OAuth 2.1.** A client that supports MCP authorization finds the sign-in automatically. If a request needs a token and has no valid token, the server answers `401` with a `WWW-Authenticate` header.
+The header points to `https://mcp.letsship.ai/.well-known/oauth-protected-resource/mcp`. SHIP supports dynamic client registration and client ID metadata documents, so you do not have to register a client first. You approve the sign-in in the SHIP console.
 
-**Personal access token.** A client without OAuth sends `Authorization: Bearer pat_...`. Create a token at https://letsship.ai/settings/tokens, and bind it to one project so that it can reach only that project.
+**Personal access token.** A client without OAuth sends `Authorization: Bearer pat_...`. Create a token at https://letsship.ai/settings/tokens. Bind it to one project, so that it can reach only that project.
 
 ## Install
 
@@ -38,7 +38,7 @@ The transport is Streamable HTTP. The server is stateless, so a client can recon
 claude mcp add --transport http ship https://mcp.letsship.ai/mcp
 ```
 
-**Claude and ChatGPT.** Add a custom connector with the URL `https://mcp.letsship.ai/mcp`, then sign in when the app asks.
+**Claude and ChatGPT.** Add a custom connector with the URL `https://mcp.letsship.ai/mcp`. Sign in when the app asks.
 
 **Cursor.** Use the button above, or add this to `.cursor/mcp.json`:
 
@@ -72,7 +72,7 @@ claude mcp add --transport http ship https://mcp.letsship.ai/mcp
 url = "https://mcp.letsship.ai/mcp"
 ```
 
-**Grok.** Open grok.com/connectors, select **New Connector**, then **Custom**, paste `https://mcp.letsship.ai/mcp` and sign in.
+**Grok.** Open grok.com/connectors. Select **New Connector**, then **Custom**. Paste the URL `https://mcp.letsship.ai/mcp`. Then sign in.
 
 **xAI API.** Pass the URL as a remote MCP tool, with a token in `headers`:
 
@@ -87,7 +87,7 @@ url = "https://mcp.letsship.ai/mcp"
 }
 ```
 
-**A client that speaks only stdio** connects through `mcp-remote`:
+**A client that supports only stdio** connects through `mcp-remote`:
 
 ```json
 {
@@ -121,10 +121,10 @@ url = "https://mcp.letsship.ai/mcp"
 
 ## Tools
 
-Each tool declares `readOnlyHint`, `destructiveHint` and `openWorldHint`, so your client can run a tool that reads at once and ask you before one that removes or replaces something or opens a payment page. The token's scopes decide what each tool can do, and a refusal names what the token lacks.
+Each tool declares `readOnlyHint`, `destructiveHint` and `openWorldHint`. With these hints, your client can run a read-only tool immediately. It can also ask you before it runs a tool that removes or replaces something, or opens a payment page. The scopes of the token decide what each tool can do, and a refusal names the scope that the token does not have.
 
 > [!IMPORTANT]
-> `start_mission`, `create_mission`, `run_scheduled_task` start a mission, and a mission start costs one credit. Messages to a running mission are free.
+> `start_mission`, `create_mission` and `run_scheduled_task` start a mission, and each mission start costs one credit. Messages to an active mission are free.
 
 ### Missions
 
@@ -248,26 +248,26 @@ Each tool declares `readOnlyHint`, `destructiveHint` and `openWorldHint`, so you
 
 ## Example: file a fix and answer the review
 
-1. `list_projects` gives the project id.
-2. `create_mission` files the issue and starts the mission. Write the acceptance criteria as checkboxes, because the QA agent tests the work against them.
-3. The mission plans, builds, opens a pull request, waits for your CI, reviews the change, deploys a preview and tests it. This takes tens of minutes, and your assistant does not have to wait.
-4. `inspect_mission` shows the stage and the verdicts. To disagree with a review, call `send_mission_instruction` with `kind: "follow_up"`. The Builder goes back to the pull request with your instruction.
+1. Call `list_projects` to get the project id.
+2. Call `create_mission` to file the issue and start the mission. Write the acceptance criteria as checkboxes, because the Tester uses them to test the work.
+3. The agents plan the change, build it and open a pull request. Then they wait for your CI, review the change, deploy a preview and test it. This takes tens of minutes, and your assistant does not have to wait.
+4. Call `inspect_mission` to read the stage and the verdicts. To disagree with a review, call `send_mission_instruction` with `kind: "follow_up"`. The Builder then works on the pull request again and follows your instruction.
 
-Do not call `start_mission` again to send feedback. A restart carries no message, so use `send_mission_instruction`.
+To send feedback, use `send_mission_instruction`. Do not call `start_mission` again, because a restart does not take a message.
 
 ## Troubleshooting
 
 | What you see | What to do |
 | --- | --- |
-| `401` and no sign-in window | Your client has no MCP OAuth. Send a personal access token in the `Authorization` header. |
-| A tool refuses with a scope name | The token lacks that scope. Create a token with it, or ask an owner for the role. |
+| `401` and no sign-in window | Your client does not support MCP OAuth. Send a personal access token in the `Authorization` header. |
+| A tool refuses with a scope name | The token does not have that scope. Create a token that has the scope, or ask an owner for a role that allows it. |
 | `create_mission` refuses with `credits_exhausted` | The workspace has no credits left. `get_billing` shows the balance. |
 | The tool list is empty, or each tool call gets `401` | The client did not finish sign-in. Sign in again from the MCP menu of your client, or remove the server and add it again. |
 | `whoami` names another project | The token is bound to that project. Use a token for the project you want. |
 
 ## Skills for your coding agent
 
-The SHIP skills teach a coding agent to hand work to SHIP from the terminal. See [letsship/skills](https://github.com/letsship/skills), or run `npx skills add https://letsship.ai`.
+The SHIP skills teach a coding agent to hand work to SHIP from the terminal. To install them, see [letsship/skills](https://github.com/letsship/skills) or run `npx skills add https://letsship.ai`.
 
 ## Learn more
 
@@ -288,4 +288,4 @@ The SHIP skills teach a coding agent to hand work to SHIP from the terminal. See
 
 ## License
 
-The files in this repository are under the MIT license. The SHIP service itself is under the [SHIP terms](https://letsship.ai/terms).
+The files in this repository are under the MIT license. The SHIP service is under the [SHIP terms](https://letsship.ai/terms).
