@@ -251,7 +251,8 @@ The SHIP skills teach a coding agent to hand work to SHIP from the terminal. See
 - Registry entry: `ai.letsship/ship` on https://registry.modelcontextprotocol.io
 - A2A agent: https://letsship.ai/docs/a2a
 - Privacy: https://letsship.ai/privacy - Terms: https://letsship.ai/terms
-- Support and security reports: support@letsship.ai
+- Support: https://letsship.ai/support
+- Security reports: support@letsship.ai
 
 ## License
 
