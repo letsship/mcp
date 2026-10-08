@@ -119,7 +119,7 @@ url = "https://mcp.letsship.ai/mcp"
 
 ## Tools
 
-Each tool declares `readOnlyHint`, `destructiveHint` and `openWorldHint`, so your client can run a tool that reads at once and ask you before one that removes something. The token's scopes decide what each tool can do, and a refusal names what the token lacks.
+Each tool declares `readOnlyHint`, `destructiveHint` and `openWorldHint`, so your client can run a tool that reads at once and ask you before one that removes or replaces something or opens a payment page. The token's scopes decide what each tool can do, and a refusal names what the token lacks.
 
 > [!IMPORTANT]
 > `start_mission`, `create_mission`, `run_scheduled_task` start a mission, and a mission start costs one credit. Messages to a running mission are free.
@@ -132,6 +132,14 @@ Each tool declares `readOnlyHint`, `destructiveHint` and `openWorldHint`, so you
 | `create_mission` | reaches outside SHIP | Create the issue and start the mission in one call, for work that has no issue yet |
 | `send_mission_instruction` | reaches outside SHIP | Tell an active mission what to change, or record a note for the agent that runs next |
 | `inspect_mission` | reads | The full record of a mission: its stages, verdicts, provenance and session logs |
+| `list_missions` | reads | The missions of your projects, with what each mission does now |
+| `get_mission` | reads | One mission: its stage, its review and test results, its pull request, its agent runs and the run with the proof. With `view: "full"`, also its events and the outcome of each stage |
+| `pause_mission` | writes | Hold a mission before its next stage. The stage that runs now finishes |
+| `resume_mission` | reaches outside SHIP | Continue a paused mission. When a checkpoint holds the mission, this approves the result of that stage |
+| `stop_mission` | removes | Stop a mission and every agent run of it. The pull request stays open |
+| `approve_mission_ceiling` | reaches outside SHIP | Let a mission continue after it stops at its credit limit. The mission then uses more credits |
+| `merge_mission` | removes | Merge the pull request of a mission, with the merge method of the repository. On a merge conflict, SHIP starts the Builder to fix the conflict and merges later |
+| `decline_mission` | removes | Close the pull request of a mission without a merge |
 | `set_agents_override` | writes | Change the harness, model, prompt or checkpoint of one role for one mission. The override goes on top of `ship.yml` and does not change the file |
 | `get_agents_override` | reads | Read the override that applies to a mission now |
 | `clear_agents_override` | removes | Remove the override, so the mission uses the project's configuration again |
@@ -163,20 +171,25 @@ Each tool declares `readOnlyHint`, `destructiveHint` and `openWorldHint`, so you
 | --- | --- | --- |
 | `list_mcp_servers` | reads | The servers that the MCP file of a project declares, each with its binding and status |
 | `list_mcp_bindings` | reads | Each binding in the projects of your organization, so you can see where each credential is used |
-| `bind_mcp_server` | writes | Choose the agents, transport, approved tools and credential for one server |
+| `bind_mcp_server` | replaces | Choose the agents, transport, approved tools and credential for one server |
 | `unbind_mcp_server` | removes | Remove a binding and delete its credential |
-| `refresh_mcp_server_tools` | reaches outside SHIP | Read the current tool list of the server, so that you can approve tools |
+| `refresh_mcp_server_tools` | removes | Read the current tool list of the server, so that you can approve tools |
 | `start_mcp_server_oauth` | reaches outside SHIP | Get a sign-in link for a remote server, for a person to open in their browser |
 | `set_mcp_config_path` | writes | Set a different MCP file for a project, such as `.cursor/mcp.json` |
 
-### Infrastructure
+### Agent runs
 
 | Tool | Kind | What it does |
 | --- | --- | --- |
-| `list_sandboxes` | reads | Agent runs, live and finished |
-| `get_sandbox` | reads | The detail and resource use of one run |
-| `get_sandbox_logs` | reads | What an agent did inside a run |
-| `stop_sandbox` | removes | Stop the agent in one run before it finishes |
+| `list_agent_runs` | reads | Agent runs, live and finished, for one mission, one role or one status |
+| `get_agent_run` | reads | The detail and resource use of one run |
+| `get_agent_run_logs` | reads | What an agent did inside a run |
+| `stop_agent_run` | removes | Stop the agent in one run before it finishes |
+
+### Preview environments
+
+| Tool | Kind | What it does |
+| --- | --- | --- |
 | `list_environments` | reads | Preview environments that SHIP deployed for open pull requests |
 | `get_environment` | reads | One preview environment, with its URL |
 | `destroy_environment` | removes | Remove a preview environment early |
@@ -206,7 +219,7 @@ Each tool declares `readOnlyHint`, `destructiveHint` and `openWorldHint`, so you
 | `build_sandbox_template` | writes | Build the active version now |
 | `get_sandbox_build_log` | reads | One page of a build log |
 | `list_sandbox_registries` | reads | The private package registries that sandboxes install from. A secret is never returned |
-| `save_sandbox_registry` | writes | Store or replace the credential for a registry. The credential never enters a sandbox |
+| `save_sandbox_registry` | replaces | Store or replace the credential for a registry. The credential never enters a sandbox |
 | `get_sandbox_capacity` | reads | How many agents your missions run at once, against the limit of your organization |
 
 ### Platform operators
@@ -252,7 +265,7 @@ The SHIP skills teach a coding agent to hand work to SHIP from the terminal. See
 - A2A agent: https://letsship.ai/docs/a2a
 - Privacy: https://letsship.ai/privacy - Terms: https://letsship.ai/terms
 - Support: https://letsship.ai/support
-- Security reports: support@letsship.ai
+- Security reports: support [at] letsship.ai
 
 ## License
 
