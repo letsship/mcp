@@ -7,7 +7,7 @@
 [![Auth](https://img.shields.io/badge/auth-OAuth%202.1%20%7C%20token-0f0a07)](https://letsship.ai/docs/mcp#connect-a-client)
 [![Docs](https://img.shields.io/badge/docs-letsship.ai-0f0a07)](https://letsship.ai/docs/mcp)
 
-Assign Linear or GitHub issues to autonomous coding agents, and get pull requests that pass automated code review and tests. SHIP runs agentic coding in your own GitHub repository. From your assistant, file missions, follow them, send instructions and read the proof of each run.
+Assign Linear or GitHub issues to an AI coding agent team. Its coding agents plan and build each change, run code review and tests, and open a pull request ready to merge in your GitHub repository. From your assistant, file missions, follow them, send instructions and read the proof of each run.
 
 SHIP runs an agentic SDLC as a managed AI software factory. A Planner, a Builder, a Reviewer and a Tester each do one stage, and your CI is a gate between them. Each role runs the coding agent and the model that you choose: Claude Code, Codex, OpenCode, Kilo Code or the pi coding agent.
 
