@@ -130,7 +130,7 @@ Each tool declares `readOnlyHint`, `destructiveHint` and `openWorldHint`. With t
 
 | Tool | Kind | What it does |
 | --- | --- | --- |
-| `start_mission` | reaches outside SHIP | Give an issue that is already in your tracker to the fleet. By default, the mission starts at the Planner. With a plan, it starts at the Builder. With an open pull request, it starts at the Reviewer or the QA agent |
+| `start_mission` | reaches outside SHIP | Give an issue that is already in your tracker to the agent team. By default, the mission starts at the Planner. With a plan, it starts at the Builder. With an open pull request, it starts at the Reviewer or the Tester |
 | `create_mission` | reaches outside SHIP | Create the issue and start the mission in one call, for work that has no issue yet |
 | `send_mission_instruction` | reaches outside SHIP | Tell an active mission what to change, or record a note for the agent that runs next |
 | `inspect_mission` | reads | The full record of a mission: its stages, verdicts, provenance and session logs |
