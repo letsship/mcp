@@ -1,9 +1,9 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "ai.letsship/ship",
-  "version": "0.22.0",
+  "version": "0.23.2",
   "title": "SHIP",
-  "description": "File missions for the SHIP agent fleet, follow them, send instructions and read their proof.",
+  "description": "Assign Linear or GitHub issues to an AI coding agent team that plans, builds, reviews and tests.",
   "websiteUrl": "https://letsship.ai/docs/mcp",
   "icons": [
     {

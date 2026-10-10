@@ -244,6 +244,7 @@ Each tool declares `readOnlyHint`, `destructiveHint` and `openWorldHint`. With t
 | Tool | Kind | What it does |
 | --- | --- | --- |
 | `whoami` | reads | The principal behind the token and the scopes of the token |
+| `get_setup_progress` | reads | What the workspace has set up so far and the next step, as the console's setup checklist shows it |
 | `healthz` | reads | The status, environment and version of the API |
 
 ## Example: file a fix and answer the review
