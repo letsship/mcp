@@ -9,7 +9,7 @@
 
 Assign Linear or GitHub issues to an AI coding agent team. Its coding agents plan and build each change, run code review and tests, and open a pull request ready to merge in your GitHub repository. With this MCP server, your assistant can file missions, follow them, send instructions and read the proof of each run.
 
-SHIP runs an agentic SDLC as a managed AI software factory. A Planner, a Builder, a Reviewer and a Tester each do one stage, and your CI is a gate between them. Each role runs the coding agent and the model that you choose: Claude Code, Codex, OpenCode, Kilo Code or the pi coding agent.
+SHIP runs an agentic SDLC as a headless AI software factory. A Planner, a Builder, a Reviewer and a Tester each do one stage, and your CI is a gate between them. Each role runs the coding agent and the model that you choose: Claude Code, Codex, OpenCode, Kilo Code or the pi coding agent.
 
 [![Install in VS Code](https://img.shields.io/badge/VS%20Code-Install%20SHIP-0098FF)](https://vscode.dev/redirect/mcp/install?name=ship&config=%7B%22type%22%3A%22http%22%2C%22url%22%3A%22https%3A%2F%2Fmcp.letsship.ai%2Fmcp%22%7D)
 [![Install in VS Code Insiders](https://img.shields.io/badge/VS%20Code%20Insiders-Install%20SHIP-24bfa5)](https://insiders.vscode.dev/redirect/mcp/install?name=ship&config=%7B%22type%22%3A%22http%22%2C%22url%22%3A%22https%3A%2F%2Fmcp.letsship.ai%2Fmcp%22%7D)
