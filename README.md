@@ -6,6 +6,7 @@
 [![Transport](https://img.shields.io/badge/transport-Streamable%20HTTP-0f0a07)](https://letsship.ai/docs/mcp)
 [![Auth](https://img.shields.io/badge/auth-OAuth%202.1%20%7C%20token-0f0a07)](https://letsship.ai/docs/mcp#connect-a-client)
 [![Docs](https://img.shields.io/badge/docs-letsship.ai-0f0a07)](https://letsship.ai/docs/mcp)
+[![Smithery](https://smithery.ai/badge/ship/ship)](https://smithery.ai/servers/ship/ship)
 
 Assign Linear, Jira or GitHub issues to an AI coding agent team. Its coding agents plan and build each change, run code review and tests, and open a pull request in your GitHub repository. With this MCP server, your assistant can file missions, follow them, send instructions and read the proof of each run.
 
