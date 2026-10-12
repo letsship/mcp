@@ -142,7 +142,7 @@ Each tool declares `readOnlyHint`, `destructiveHint` and `openWorldHint`. With t
 | `approve_mission_ceiling` | reaches outside SHIP | Let a mission continue after it stops at its credit limit. The mission then uses more credits |
 | `merge_mission` | removes | Merge the pull request of a mission, with the merge method of the repository. On a merge conflict, SHIP starts the Builder to fix the conflict and merges later |
 | `decline_mission` | removes | Close the pull request of a mission without a merge |
-| `set_agents_override` | writes | Change the harness, model, prompt or checkpoint of one role for one mission. The override goes on top of `ship.yml` and does not change the file |
+| `set_agents_override` | replaces | Change the harness, model, prompt or checkpoint of one role for one mission. The override goes on top of `ship.yml` and does not change the file |
 | `get_agents_override` | reads | Read the override that applies to a mission now |
 | `clear_agents_override` | removes | Remove the override, so the mission uses the project's configuration again |
 | `set_mission_auto_merge` | reaches outside SHIP | Turn auto-merge on or off for one mission. For that mission, the setting replaces the auto-merge of the project |
@@ -167,7 +167,7 @@ Each tool declares `readOnlyHint`, `destructiveHint` and `openWorldHint`. With t
 | `list_scheduled_tasks` | reads | The missions that a project runs on a schedule |
 | `get_scheduled_task` | reads | One scheduled task, with its schedule and prompt |
 | `create_scheduled_task` | writes | Add a mission that runs on a schedule |
-| `update_scheduled_task` | writes | Change the schedule or prompt of a scheduled task, or disable it |
+| `update_scheduled_task` | replaces | Change the schedule or prompt of a scheduled task, or disable it |
 | `run_scheduled_task` | reaches outside SHIP | Run a scheduled task now, outside its schedule |
 | `list_scheduled_task_runs` | reads | What past runs did, and what they cost |
 | `list_scheduled_task_templates` | reads | Templates that you can copy to start a scheduled task |
